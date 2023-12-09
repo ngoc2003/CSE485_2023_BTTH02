@@ -1,6 +1,6 @@
 <?php
 class Database{
-    private $host  = 'localhost';
+    private $host  = 'localhost:3306';
     private $user  = 'root';
     private $password   = "buithuyngoc2003";
     private $database  = "cms"; 
@@ -14,5 +14,4 @@ class Database{
       }
     }
 }
-
 ?>
