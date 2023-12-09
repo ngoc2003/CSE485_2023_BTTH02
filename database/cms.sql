@@ -57,7 +57,11 @@ CREATE TABLE `cms_posts` (
 --
 
 CREATE TABLE `cms_user` (
+<<<<<<< HEAD:database/cms.sql
   `id` int NOT NULL auto_increment primary key,
+=======
+  `id` int(11) NOT NULL primary key auto_increment,
+>>>>>>> main:cms.sql
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
