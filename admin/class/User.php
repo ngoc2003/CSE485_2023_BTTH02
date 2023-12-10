@@ -32,7 +32,9 @@ class User {
     }
 
     public function loggedIn (){
-        session_start();
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
 		if(!empty($_SESSION["userid"])) {
 			return 1;
 		} else {
@@ -41,8 +43,10 @@ class User {
 	}
 
     public function isAdmin() {
-        session_start();
-        if($_SESSION["user_type"] == 1) return 1;
+        if (session_status() == PHP_SESSION_NONE) {
+            session_start();
+        }
+        if(isset($_SESSION["user_type"]) && $_SESSION["user_type"]  == 1) return 1;
         return 0;
     }
     
