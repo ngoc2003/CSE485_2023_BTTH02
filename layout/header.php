@@ -2,7 +2,7 @@
     include_once 'lib/auth.php';
     include_once 'lib/lib.php';
 ?>
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
+<nav class="navbar navbar-expand-lg bg-body-tertiary mb-5">
     <div class="container-fluid">
         <div style="width: 100%">
             <a class="navbar-brand" href="index.php">MY DEMO CMS</a>
@@ -25,7 +25,7 @@
                 </li>
                 <li class="nav-item btn btn-primary btn-sm">
                     <?php if (!$isLogged) { ?> <a class="nav-link text-white" href="login.php">Login</a>
-                    <?php } else { ?> <a class="nav-link text-white" href="logout.php">Logout</a>
+                    <?php } else { ?> <a class="nav-link text-white" href="admin/logout.php">Logout</a>
                     <?php }  ?>
                 </li>
             </ul>
