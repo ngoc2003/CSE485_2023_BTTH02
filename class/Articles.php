@@ -1,4 +1,15 @@
 <?php
+class Articles {
+	private $id;
+    private $postTable = 'cms_posts';
+    private $categoryTable = 'cms_category';
+    private $userTable = 'cms_user';
+    private $conn;
+
+    public function __construct($db) {
+        $this->conn = $db;
+    }
+	
     public function getArticles(){
 
 	$query = '';
@@ -14,6 +25,7 @@
 	$stmt->execute();
 	$result = $stmt->get_result();	
 	return $result;	
+}
 }
 
 ?>
