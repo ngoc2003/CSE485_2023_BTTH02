@@ -11,7 +11,6 @@ SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
 SET time_zone = "+00:00";
 
-
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
 /*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
@@ -27,8 +26,10 @@ SET time_zone = "+00:00";
 -- Cấu trúc bảng cho bảng `cms_category`
 --
 
+USE cms
+
 CREATE TABLE `cms_category` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL primary key auto_increment,
   `name` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -39,7 +40,7 @@ CREATE TABLE `cms_category` (
 --
 
 CREATE TABLE `cms_posts` (
-  `id` int(11) NOT NULL,
+  `id` int(11) NOT NULL primary key auto_increment,
   `title` text NOT NULL,
   `message` text NOT NULL,
   `category_id` int(11) NOT NULL,
@@ -56,15 +57,18 @@ CREATE TABLE `cms_posts` (
 --
 
 CREATE TABLE `cms_user` (
-  `id` int(11) NOT NULL,
+<<<<<<< HEAD:database/cms.sql
+  `id` int NOT NULL auto_increment primary key,
+=======
+  `id` int(11) NOT NULL primary key auto_increment,
+>>>>>>> main:cms.sql
   `first_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
   `email` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL,
-  `type` int(11) NOT NULL,
-  `deleted` int(11) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-COMMIT;
+  `password` varchar(150) NOT NULL,
+  `type` int NOT NULL default 0,
+  `deleted` int NOT NULL DEFAULT 0
+);
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
