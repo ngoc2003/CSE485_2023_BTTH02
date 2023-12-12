@@ -1,7 +1,7 @@
 <?php
     $curPageName = substr($_SERVER["SCRIPT_NAME"],strrpos($_SERVER["SCRIPT_NAME"],"/")+1);
     $sides = [
-        ["label" => "Dashboard", "route" => "dashboard.php"],
+        ["label" => "Dashboard", "route" => "/dashboard.php"],
         ["label" => "Posts", "route" => "posts.php"],
         ["label" => "Categories", "route" => "categories.php"],
         ["label" => "Users", "route" => "users.php"],

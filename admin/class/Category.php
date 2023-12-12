@@ -17,7 +17,6 @@ class Category {
 			SELECT id, name
 			FROM ".$this->categoryTable."  
 			 ";
-
 		
 		if(isset($_POST["search"]["value"])){
 			$sqlQuery .= ' name LIKE "%'.$_POST["search"]["value"].'%" ';				
