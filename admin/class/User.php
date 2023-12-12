@@ -6,7 +6,9 @@ class User {
     public $password;
     public $first_name;
     public $last_name;
-    public $type; 
+    public $type = 0; 
+    public $id;
+    public $deleted;
 
 	public function __construct($db){
         $this->conn = $db;
@@ -17,8 +19,8 @@ class User {
             $hashedPassword = password_hash($this->password, PASSWORD_DEFAULT);
     
             $sqlString ="
-                INSERT INTO ".$this->userTable."(`first_name`, `last_name`, `email`, `password`)
-                VALUES('".$this->first_name."','".$this->last_name."','".$this->email."','".$hashedPassword."')";
+                INSERT INTO ".$this->userTable."(`first_name`, `last_name`, `email`, `password`, `type`)
+                VALUES('".$this->first_name."','".$this->last_name."','".$this->email."','".$hashedPassword."','".$this->type."')";
 
                 try {
                     $stmt = $this->conn->prepare($sqlString);
@@ -81,5 +83,76 @@ class User {
         }
         return 0;
     }
+
+    public function getUsersListing(){		
+		
+        $sqlQuery = "
+        SELECT id, CONCAT(first_name, ' ', last_name) AS name, 
+        case when type = 1 then 'admin' 
+        else 'user' 
+        end as type, 
+        email, COALESCE(deleted, 'Not Deleted') AS status
+        FROM ".$this->userTable."  
+         ";
+
+    $result = $this->conn->query($sqlQuery);	
+    return $result;
+	}
+	
+	public function getUser(){		
+		if($this->id) {
+			$sqlQuery = "
+			SELECT id, first_name, last_name, email, type
+			FROM ".$this->userTable." 			
+			WHERE id = ? ";
+			$stmt = $this->conn->prepare($sqlQuery);
+			$stmt->bind_param("i", $this->id);	
+			$stmt->execute();
+			$result = $stmt->get_result();
+			$user = $result->fetch_assoc();
+			return $user;
+		}		
+	}
+	
+	public function update(){
+		
+		if($this->id) {			
+			$stmt = $this->conn->prepare("
+				UPDATE ".$this->userTable." 
+				SET first_name= ?, last_name = ?, email = ?, type = ?
+				WHERE id = ?");
+	 
+			$this->id = htmlspecialchars(strip_tags($this->id));
+			$this->first_name = htmlspecialchars(strip_tags($this->first_name));
+			$this->last_name = htmlspecialchars(strip_tags($this->last_name));
+			$this->email = htmlspecialchars(strip_tags($this->email));
+			$this->type = htmlspecialchars(strip_tags($this->type));
+			
+			$stmt->bind_param("ssssi", $this->first_name, $this->last_name, $this->email, $this->type, $this->id);
+			
+			if($stmt->execute()){
+				return true;
+			}			
+		}
+		
+	}
+	
+	public function delete(){
+		
+		if($this->id) {	
+		
+			$stmt = $this->conn->prepare("
+				DELETE FROM ".$this->userTable." 				
+				WHERE id = ?");
+
+			$this->id = htmlspecialchars(strip_tags($this->id));
+
+			$stmt->bind_param("i", $this->id);
+
+			if($stmt->execute()){
+				return true;
+			}
+		}
+	}
 }
 ?>
