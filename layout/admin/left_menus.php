@@ -35,8 +35,8 @@
                         foreach ($sides as $item) {
                         ?>
             <a href="<?= $item['route'] ?>"
-                class="list-group-item main-color-bg <?= $item['route'] == $curPageName ? 'active' : ''  ?>"><span
-                    class="glyphicon glyphicon-cog" aria-hidden="true"></span>
+                class="list-group-item  <?= $item['route'] == $curPageName ? 'active' : ''  ?>">
+                <span class="glyphicon glyphicon-cog" aria-hidden="true"></span>
                 <?= $item['label'] ?>
             </a>
             <?php

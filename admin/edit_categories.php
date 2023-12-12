@@ -24,7 +24,7 @@ if(isset($_GET["id"])) {
 
 if(isset($_POST["categoryName"])) {
 	$category->name = $_POST["categoryName"];	
-	$lastInserId = $category->insert();
+	$lastInserId = $category->update();
     header("Location: categories.php");
 } 
 include_once '../layout/admin/topbar.php';
